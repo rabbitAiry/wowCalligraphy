@@ -35,7 +35,7 @@ public class CalligraphyAdapter extends RecyclerView.Adapter<CalligraphyHolder> 
     public void onBindViewHolder(@NonNull CalligraphyHolder holder, int position) {
         int adapterPosition = holder.getAdapterPosition();
         CalligraphyTexts calligraphyText = list[adapterPosition];
-        holder.text.setText(calligraphyText.getText());
+        holder.text.setText(calligraphyText.getSpannableText());
         holder.itemView.setOnClickListener(v -> listener.onItemClickListener(calligraphyText.name()));
     }
 

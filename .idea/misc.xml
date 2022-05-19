@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/appCreation/WowCalligraphy/app/src/main/res/drawable/calligraphy_background.xml" value="0.2045" />
+        <entry key="..\:/appCreation/WowCalligraphy/app/src/main/res/drawable/app_background.xml" value="0.148" />
+        <entry key="..\:/appCreation/WowCalligraphy/app/src/main/res/drawable/calligraphy_background.xml" value="0.148" />
         <entry key="..\:/appCreation/WowCalligraphy/app/src/main/res/drawable/draw_view_background.xml" value="0.2045" />
-        <entry key="..\:/appCreation/WowCalligraphy/app/src/main/res/layout/activity_calligraphy.xml" value="0.275" />
+        <entry key="..\:/appCreation/WowCalligraphy/app/src/main/res/layout/activity_calligraphy.xml" value="0.25" />
         <entry key="..\:/appCreation/WowCalligraphy/app/src/main/res/layout/activity_main.xml" value="0.275" />
         <entry key="..\:/appCreation/WowCalligraphy/app/src/main/res/layout/dialog_finish_work.xml" value="0.275" />
         <entry key="..\:/appCreation/WowCalligraphy/app/src/main/res/layout/item_calligraphy_text.xml" value="0.1574074074074074" />
