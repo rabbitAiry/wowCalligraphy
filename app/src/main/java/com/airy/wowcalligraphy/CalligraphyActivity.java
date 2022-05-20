@@ -29,6 +29,7 @@ public class CalligraphyActivity extends AppCompatActivity {
     public static final String CALLIGRAPHY_ID = "CALLIGRAPHY_ID";
     private ActivityCalligraphyBinding binding;
     private CalligraphyTexts currCalligraphyText;
+    private int[] target;
     private List<Bitmap> list;
     private int characterIdx = 0, targetId = 0;
     private float sumFilledRate = 0, sumOverFilledRate = 0;
@@ -45,7 +46,7 @@ public class CalligraphyActivity extends AppCompatActivity {
         updateCharacterView();
 
         binding.menuFinish.setEnabled(false);
-        binding.calligraphyText.setText(currCalligraphyText.getSpannableText());
+        binding.calligraphyText.setText(currCalligraphyText.getSpannableText(target));
     }
 
     /**
@@ -66,7 +67,7 @@ public class CalligraphyActivity extends AppCompatActivity {
      */
     private void getCurrCalligraphySet(Intent intent) {
         currCalligraphyText = CalligraphyTexts.valueOf(intent.getStringExtra(CALLIGRAPHY_ID));
-        int[] target = currCalligraphyText.getTarget();
+        target = currCalligraphyText.getTarget();
         characterIdx = target[0];
         new Thread(() -> {
             try {
@@ -147,7 +148,6 @@ public class CalligraphyActivity extends AppCompatActivity {
         list.add(characterIdx, binding.calligraphyCurrCharacterDrawView.getDrawBitmap(averCharacterWidth, averCharacterHeight));
         sumFilledRate += currFilledRate;
         sumOverFilledRate += currOverFilledRate;
-        int[] target = currCalligraphyText.getTarget();
         targetId++;
         characterIdx = target[targetId];
         updateCharacterView();
@@ -180,7 +180,7 @@ public class CalligraphyActivity extends AppCompatActivity {
     public void setFinishDialog(Bitmap resultBitmap) {
         sumFilledRate += currFilledRate;
         sumOverFilledRate += currOverFilledRate;
-        int characterCnt = currCalligraphyText.getTarget().length;
+        int characterCnt = target.length;
         float averFilledPercentage = sumFilledRate / characterCnt * 100, averOverFilledPercentage = sumOverFilledRate / characterCnt * 100;
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -222,7 +222,7 @@ public class CalligraphyActivity extends AppCompatActivity {
         resWidth = 0;
         for (int i = 0; i < list.size(); i++) {
             Bitmap curr = list.get(i);
-            canvas.drawBitmap(curr, (float) resWidth, (maxHeight - curr.getHeight()) >> 1, null);
+            canvas.drawBitmap(curr, (float) resWidth, maxHeight - curr.getHeight(), null);
             resWidth += curr.getWidth();
         }
         canvas.save();

@@ -58,11 +58,12 @@
 
     <TextView
         android:id="@+id/calligraphy_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/calligraphy_curr_character_tag"
         app:layout_constraintBaseline_toBaselineOf="@id/calligraphy_curr_character"
         tools:text="偷得浮生半日闲" />
 

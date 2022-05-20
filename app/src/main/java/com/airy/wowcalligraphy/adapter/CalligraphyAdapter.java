@@ -12,8 +12,8 @@ import com.airy.wowcalligraphy.R;
 import com.airy.wowcalligraphy.util.CalligraphyTexts;
 
 public class CalligraphyAdapter extends RecyclerView.Adapter<CalligraphyHolder> {
-    private AdapterClickListener listener;
-    private CalligraphyTexts[] list;
+    private final AdapterClickListener listener;
+    private final CalligraphyTexts[] list;
 
     public CalligraphyAdapter(AdapterClickListener listener, CalligraphyTexts[] list) {
         this.listener = listener;
@@ -35,7 +35,9 @@ public class CalligraphyAdapter extends RecyclerView.Adapter<CalligraphyHolder> 
     public void onBindViewHolder(@NonNull CalligraphyHolder holder, int position) {
         int adapterPosition = holder.getAdapterPosition();
         CalligraphyTexts calligraphyText = list[adapterPosition];
-        holder.text.setText(calligraphyText.getSpannableText());
+        holder.text.setText(calligraphyText.getText());
+        holder.writer.setText(calligraphyText.getWriter());
+        holder.title.setText("《"+calligraphyText.getTitle()+"》");
         holder.itemView.setOnClickListener(v -> listener.onItemClickListener(calligraphyText.name()));
     }
 
@@ -47,8 +49,12 @@ public class CalligraphyAdapter extends RecyclerView.Adapter<CalligraphyHolder> 
 
 class CalligraphyHolder extends RecyclerView.ViewHolder{
     TextView text;
+    TextView writer;
+    TextView title;
     public CalligraphyHolder(@NonNull View itemView) {
         super(itemView);
         text = itemView.findViewById(R.id.item_text);
+        writer = itemView.findViewById(R.id.item_writer);
+        title = itemView.findViewById(R.id.item_title);
     }
 }

@@ -24,10 +24,16 @@ package com.airy.wowcalligraphy.textSplit;
 //    public static void main(String[] args) {
 //        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 //        TextSplit ts = new TextSplit();
-//        // ts.split(8, 0, "LanTing_KuaiRang", "快然自足不知老之将至", "img/LaoZhiJiangZhi.jpg", 12);
-//        // ts.split(4, 0, "LanTing_TianLang", "天朗气清惠风和畅", "img/TianLangQiQing.jpg",50);
-//        // ts.split(12, 0, "LanTing_Yangguan", "仰", "img/TianLangQiQing.jpg",50);
-//        // ts.split(1, 1, "LanTing_Yangguan", "观宇宙之大俯察品类之盛", "img/GuanYvZhouZhiDa.jpg",12);
+//        // ts.split(8, 0, "LanTing_KuaiRang", "快然自足不知老之将至", "img/LaoZhiJiangZhi.jpg", 12,125,5);
+//        // ts.split(4, 0, "LanTing_TianLang", "天朗气清惠风和畅", "img/TianLangQiQing.jpg",50,125,5);
+//        // ts.split(12, 0, "LanTing_Yangguan", "仰", "img/TianLangQiQing.jpg",50,125,5);
+//        // ts.split(1, 1, "LanTing_Yangguan", "观宇宙之大俯察品类之盛", "img/GuanYvZhouZhiDa.jpg",12,125,5);
+//        // ts.split(3, 0, "LiSao_JiTi", "既替余以蕙纕兮又申之以揽茝","img/JiTiYvYi.jpeg",50,165,5);
+//        // ts.split(6, 0, "LiSao_YiYv", "亦余心之所善兮虽九死其犹未悔", "img/YiYvXinZhi.jpeg", 25, 165, 4);
+//        // ts.split(3, 0, "ChiBi_ShiZao", "是造物者之", "img/ShiZaoWuZhe.jpeg", 15, 135, 5);
+//        // ts.split(9, 5, "ChiBi_ShiZao", "无尽藏也而吾与子之所共适", "img/ShiZaoWuZhe.jpeg", 20, 135, 5);
+//        // ts.split(2, 0, "ChiBi_ErDe", "耳得之而为声目遇之而成色", "img/ErDeZhiEr.jpeg", 20, 120, 4);
+//        // ts.split(10, 0, "Chibi_QingFeng", "清风徐来水波不兴", "img/QingFengXvLai.jpg", 100, 140, 4);
 //    }
 //
 //    /**
@@ -39,9 +45,11 @@ package com.airy.wowcalligraphy.textSplit;
 //     * @param text  语句
 //     * @param imageUrl  待切割图像源
 //     * @param splitPercent  文字与文字间隔的比例，这是为了防止如“旦”字被分割为“日”和“一”。玄学参数
+//     * @param threshold 二值化的阈值
+//     * @param blurSize 滤波器模块大小
 //     */
-//    void split(int start, int startIdx,String id ,String text, String imageUrl, int splitPercent){
-//        Mat image = getBinaryImage(Imgcodecs.imread(imageUrl));
+//    void split(int start, int startIdx, String id ,String text, String imageUrl, int splitPercent, int threshold, int blurSize){
+//        Mat image = getBinaryImage(Imgcodecs.imread(imageUrl), threshold, blurSize);
 //        ArrayList<Mat> columnMats = splitColumns(image);
 //        ArrayList<Mat> charcterMats = splitRows(columnMats, splitPercent);
 //        System.out.println(charcterMats.size());
@@ -51,13 +59,13 @@ package com.airy.wowcalligraphy.textSplit;
 //        }
 //    }
 //
-//    Mat getBinaryImage(Mat original){
+//    Mat getBinaryImage(Mat original, int threshold, int blurSize){
 //        int height = original.rows(), width = original.cols();
 //        Mat grayImage = new Mat(height, width, CvType.CV_8SC1);
 //        Mat binaryImage = new Mat(height, width, CvType.CV_8SC1);
 //        Imgproc.cvtColor(original, grayImage,Imgproc.COLOR_RGB2GRAY);
-//        Imgproc.blur(grayImage, grayImage, new Size(5,5));
-//        Imgproc.threshold(grayImage, binaryImage, 125, 255, Imgproc.THRESH_BINARY);
+//        Imgproc.blur(grayImage, grayImage, new Size(blurSize,blurSize));
+//        Imgproc.threshold(grayImage, binaryImage, threshold, 255, Imgproc.THRESH_BINARY);
 //        // Imgproc.threshold(grayImage, binaryImage, 120, 255, Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);
 //        Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT,new Size(2,2));
 //        Imgproc.morphologyEx(binaryImage,binaryImage,Imgproc.MORPH_OPEN,kernel);
